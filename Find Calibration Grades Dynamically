@@ -1,0 +1,71 @@
+Grade = 
+var Peg=MAX(Dashboard_Table[PegCount_Table.peg_Count])
+var RangPeg=[MaxPeg]-[MinPeg]
+var widthPeg=DIVIDE(RangPeg,6)
+var MinrangPeg1=widthPeg+[MinPeg]
+var MinrangPeg2=MinrangPeg1+widthPeg
+var MinrangPeg3=MinrangPeg2+widthPeg
+var MinrangPeg4=MinrangPeg3+widthPeg
+var MinrangPeg5=MinrangPeg4+widthPeg
+var MinrangPeg6=MinrangPeg5+widthPeg
+
+
+var RangSale=[MaxSale]-[MinSale]
+var widthSale=DIVIDE(RangSale,6)
+var MinrangSale1=widthSale-[MinSale]
+var MinrangSale2=MinrangSale1+widthSale
+var MinrangSale3=MinrangSale2+widthSale
+var MinrangSale4=MinrangSale3+widthSale
+var MinrangSale5=MinrangSale4+widthSale
+var MinrangSale6=MinrangSale5+widthSale
+
+Var EngIndx=MAX(Dashboard_Table[Eng Index])
+var RangEng=[MaxEng]-[MinEng]
+var widthEng=DIVIDE(RangEng,6)
+var MinrangEng1=widthEng+[MinEng]
+var MinrangEng2=MinrangEng1+widthEng
+var MinrangEng3=MinrangEng2+widthEng
+var MinrangEng4=MinrangEng3+widthEng
+var MinrangEng5=MinrangEng4+widthEng
+var MinrangEng6=MinrangEng5+widthEng
+
+var RangAOOS=[MaxAvgOOS]-[MinAvgOOS]
+var widthAOOS=DIVIDE(RangAOOS,6)
+var MinrangAOOS1=widthAOOS+[MinAvgOOS]
+var MinrangAOOS2=MinrangAOOS1+widthAOOS
+var MinrangAOOS3=MinrangAOOS2+widthAOOS
+var MinrangAOOS4=MinrangAOOS3+widthAOOS
+var MinrangAOOS5=MinrangAOOS4+widthAOOS
+var MinrangAOOS6=MinrangAOOS5+widthAOOS
+
+Var PegScore=if([PegC]<=MinrangPeg1,5,
+if([PegC]>MinrangPeg1 && [PegC]<=MinrangPeg2,6,
+if([PegC]>MinrangPeg2 && [PegC]<=MinrangPeg3,7,
+if([PegC]>MinrangPeg3 && [PegC]<=MinrangPeg4,8
+,if([PegC]>MinrangPeg4 && [PegC]<=MinrangPeg5,9,10)))))
+
+Var SaleScore=if([sales]<=MinrangSale1,5,
+if([sales]>MinrangSale1 && [sales]<=MinrangSale2,6,
+if([sales]>MinrangSale2 && [sales]<=MinrangSale3,7,
+if([sales]>MinrangSale3 && [sales]<=MinrangSale4,8
+,if([sales]>MinrangSale4 && [sales]<=MinrangSale5,9,10)))))
+
+Var EngScore=if([Engindx]<=MinrangEng1,10,
+if([Engindx]>MinrangEng1 && [Engindx]<=MinrangEng2,9,
+if([Engindx]>MinrangEng2 && [Engindx]<=MinrangEng3,8,
+if([Engindx]>MinrangEng3 && [Engindx]<=MinrangEng4,7
+,if([Engindx]>MinrangEng4 && [Engindx]<=MinrangEng5,6,5)))))
+
+Var AvgOOSScore=if([AVROOSVariance]<=MinrangAOOS1,1,
+if([AVROOSVariance]>MinrangAOOS1 && [AVROOSVariance]<=MinrangAOOS2,2,
+if([AVROOSVariance]>MinrangAOOS2 && [AVROOSVariance]<=MinrangAOOS3,3,
+if([AVROOSVariance]>MinrangAOOS3 && [AVROOSVariance]<=MinrangAOOS4,4
+,if([AVROOSVariance]>MinrangAOOS4 && [AVROOSVariance]<=MinrangAOOS5,5,6)))))
+
+var Grade=((SaleScore*MAX(Dashboard_Table[Settings.SALES]))+(PegScore*MAX(Dashboard_Table[Settings.STORE PEG]))+(AvgOOSScore*MAX(Dashboard_Table[Settings.AVG OOS VAR]))+(EngScore*MAX(Dashboard_Table[Settings.ENGAGEMENT INDEX])))
+
+var maxgrade=MAXX(Dashboard_Table,Grade)
+
+return
+Grade
+
