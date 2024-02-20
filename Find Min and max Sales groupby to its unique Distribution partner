@@ -1,0 +1,3 @@
+sales = SUM(Dashboard_Table[SALES])
+MinSale = CALCULATE(MINX(GROUPBY(FILTER(Dashboard_Table,Dashboard_Table[dpcompanyname]=[sliceDPselect]),Dashboard_Table[STORE_ERP_ID],"X",SUMX(CURRENTGROUP(),[sales])),[X]),ALLSELECTED(Dashboard_Table))
+MaxSale = CALCULATE(MAXX(GROUPBY(FILTER(Dashboard_Table,Dashboard_Table[dpcompanyname]=[sliceDPselect]),Dashboard_Table[STORE_ERP_ID],"X",SUMX(CURRENTGROUP(),[sales])),[X]),ALLSELECTED(Dashboard_Table))
